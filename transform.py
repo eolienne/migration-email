@@ -4,7 +4,7 @@
 
 import csv
 
-input_file = 'sendy.csv'
+input_file = 'master-project.csv'
 output = 'output.csv'
 emails = {}
 
@@ -15,9 +15,10 @@ emails = {}
 # }
 with open(input_file, 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
-    for (email, site, _,_,_,_) in reader:
-        emails.setdefault(email, []).append(site)
+    for (sd_owner, prod_url, _,_,_,_,_,) in reader:
+        emails.setdefault(sd_owner, []).append(prod_url)
 
+#This section doesn't seem to do anything. Does it need to?
 # Step 2: Print
-for (email, sites) in emails.items():
-    print(", ".join([email] + sorted(sites)))
+for (sd_owner, prod_url) in emails.items():
+   print(", ".join([sd_owner] + sorted(prod_url)))
