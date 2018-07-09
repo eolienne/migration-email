@@ -18,7 +18,6 @@ with open(input_file, 'r') as csvfile:
     for (sd_owner, prod_url, _,_,_,_,_,) in reader:
         emails.setdefault(sd_owner, []).append(prod_url)
 
-#This section doesn't seem to do anything. Does it need to?
 # Step 2: Print
 for (sd_owner, prod_url) in emails.items():
    print(", ".join([sd_owner] + sorted(prod_url)))
