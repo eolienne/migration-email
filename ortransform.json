@@ -1,0 +1,143 @@
+[
+  {
+    "op": "core/column-addition-by-fetching-urls",
+    "description": "Create column combined at index 1 by fetching URLs based on column sd_name using expression grel:cell.cross(\"vhost output prod\",\"Site Name\").cells[\"sd_name\"].value[0]",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "combined",
+    "columnInsertIndex": 1,
+    "baseColumnName": "sd_name",
+    "urlExpression": "grel:cell.cross(\"vhost output prod\",\"Site Name\").cells[\"sd_name\"].value[0]",
+    "onError": "set-to-blank",
+    "delay": 5000,
+    "cacheResponses": true
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column combined",
+    "columnName": "combined"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column combined at index 1 based on column sd_name using expression grel:cell.cross('test123','Site Name').cells['Site Name'].value[0]",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "combined",
+    "columnInsertIndex": 1,
+    "baseColumnName": "sd_name",
+    "expression": "grel:cell.cross('test123','Site Name').cells['Site Name'].value[0]",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column combined to Virtual Hosts",
+    "oldColumnName": "combined",
+    "newColumnName": "Virtual Hosts"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column Virtual Hosts",
+    "columnName": "Virtual Hosts"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column Sites with Virtual hosts at index 1 based on column sd_name using expression grel:cell.cross('test123','Site Name').cells['URL'].value[0]",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "Sites with Virtual hosts",
+    "columnInsertIndex": 1,
+    "baseColumnName": "sd_name",
+    "expression": "grel:cell.cross('test123','Site Name').cells['URL'].value[0]",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column Dev site vhosts at index 1 based on column sd_name using expression grel:cell.cross('dev vhost','Site Name').cells['URL'].value[0]",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "Dev site vhosts",
+    "columnInsertIndex": 1,
+    "baseColumnName": "sd_name",
+    "expression": "grel:cell.cross('dev vhost','Site Name').cells['URL'].value[0]",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column Sites dev at index 1 based on column sd_name using expression grel:cell.cross('sites dev','sd_name').cells['sd_name'].value[0]",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "Sites dev",
+    "columnInsertIndex": 1,
+    "baseColumnName": "sd_name",
+    "expression": "grel:cell.cross('sites dev','sd_name').cells['sd_name'].value[0]",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-move",
+    "description": "Move column sd_owner to position 0",
+    "columnName": "sd_owner",
+    "index": 0
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column sd_name using expression grel:\"https://sites.stanford.edu/\"+value",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "sd_name",
+    "expression": "grel:\"https://sites.stanford.edu/\"+value",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Sites dev using expression grel:\"https://sites-dev.stanford.edu/\"+value",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "Sites dev",
+    "expression": "grel:\"https://sites-dev.stanford.edu/\"+value",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column prod_url at index 5 based on column Sites with Virtual hosts using expression grel:if(isNull(value),cells['sd_name'].value,value)",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "prod_url",
+    "columnInsertIndex": 5,
+    "baseColumnName": "Sites with Virtual hosts",
+    "expression": "grel:if(isNull(value),cells['sd_name'].value,value)",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column dev_url at index 4 based on column Dev site vhosts using expression grel:if(isNull(value),cells['Sites dev'].value,value)",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "newColumnName": "dev_url",
+    "columnInsertIndex": 4,
+    "baseColumnName": "Dev site vhosts",
+    "expression": "grel:if(isNull(value),cells['Sites dev'].value,value)",
+    "onError": "set-to-blank"
+  }
+]
