@@ -139,5 +139,18 @@
     "baseColumnName": "Dev site vhosts",
     "expression": "grel:if(isNull(value),cells['Sites dev'].value,value)",
     "onError": "set-to-blank"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column sd_owner using expression grel:value+'@stanford.edu'",
+    "engineConfig": {
+      "mode": "row-based",
+      "facets": []
+    },
+    "columnName": "sd_owner",
+    "expression": "grel:value+'@stanford.edu'",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
   }
 ]
