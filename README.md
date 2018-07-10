@@ -12,17 +12,18 @@ Source data:
 
 Flow
 1. Acquire above data from developer 
-2. Import data sources as separate projects into OpenRefine
-3. Use list of site owners and their sites on prod as base (master project) 
-4. Run JSON recipe in OpenRefine: migration-email/ortransform.json
-5. Export as CSV and open in Excel
-6. Delete all columns except "sd_owner","prod_url", and "dev_url"
-7. Confirm that column order is as listed in step 6
-8. Run python3 transform.py >> output.csv
-9. Run python3 transform-dev.py >> output-dev.csv
-10. Import output files into mailchimp mailing list separately 
-11. Don't forget to update contacts when doing the second import or else _all is lost_
-12. Check data in Campaign preview
+2. Remove instances from GSE and Earth of already migrated sites
+3. Import data sources as separate projects into OpenRefine
+4. Use list of site owners and their sites on prod as base (master project) 
+5. Run JSON recipe in OpenRefine: migration-email/ortransform.json
+6. Export as CSV and open in Excel
+7. Delete all columns except "sd_owner","prod_url", and "dev_url"
+8. Confirm that column order is as listed in step 6
+9. Run python3 transform.py >> output.csv
+10. Run python3 transform-dev.py >> output-dev.csv
+11. Import output files into mailchimp mailing list separately 
+12. Don't forget to update contacts when doing the second import or else _all is lost_
+13. Check data in Campaign preview
 
 Current room for improvement as of 9 July 2018, 10:51AM
 * Manual deleting of blank cells on output-dev.csv in Excel
