@@ -4,7 +4,7 @@
 
 import csv
 
-input_file = 'master-project.csv'
+input_file = 'group.csv'
 output = 'output.csv'
 emails = {}
 
@@ -15,9 +15,9 @@ emails = {}
 # }
 with open(input_file, 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
-    for (sd_owner, prod_url, _,_,_,_,_,) in reader:
-        emails.setdefault(sd_owner, []).append(prod_url)
+    for (owner, site) in reader:
+        emails.setdefault(owner, []).append(site)
 
 # Step 2: Print
-for (sd_owner, prod_url) in emails.items():
-   print(", ".join([sd_owner] + sorted(prod_url)))
+for (owner, site) in emails.items():
+   print(", ".join([owner] + sorted(site)))
